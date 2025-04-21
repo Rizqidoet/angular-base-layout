@@ -3,3 +3,8 @@ export interface MainMenuDto {
   path: string,
   isActive: boolean,
 }
+
+export interface ErrorMessage {
+  statusCode: number;
+  message: string;
+}

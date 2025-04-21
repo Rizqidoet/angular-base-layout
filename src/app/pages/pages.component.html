@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-sm bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-color-primary sticky-top shadow">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand text-white fw-600" href="#">BaseApp</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,8 +11,9 @@
             class="nav-link cursor-pointer"
             aria-current="page"
             routerLinkActive="active"
-            #rla{{menu.path}}="routerLinkActive"
+            #rla="routerLinkActive"
             [routerLink]="menu.path"
+            [ngClass]="rla.isActive ? 'text-muted' : 'text-white'"
           >
             {{menu.label}}
           </a>
@@ -21,6 +22,6 @@
     </div>
   </div>
 </nav>
-<div class="d-flex flex-column">
+<div class="d-flex flex-column px-1 px-md-3 px-lg-5">
   <router-outlet></router-outlet>
 </div>

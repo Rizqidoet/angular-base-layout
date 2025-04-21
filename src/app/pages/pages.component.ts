@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MainMenuDto } from '../shared/dto/main-menu/main-menu.model';
+import { MainMenuDto } from '../shared/dto/global-model.model';
 
 @Component({
   selector: 'app-pages',
