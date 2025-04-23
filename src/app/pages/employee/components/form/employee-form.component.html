@@ -1,1 +1,168 @@
-<p>employee-form works!</p>
+<div class="d-flex flex-column mt-3 mt-md-5 mx-3 mx-lg-0">
+  <div class="col-12 bg-color-quinary rounded-top p-3">
+    <span class="ff-poppins fw-600 fs-28 text-white me-auto">
+      Form Employee Management
+    </span>
+  </div>
+  <div class="col-12 border border-start border-end py-3 px-3 d-flex flex-column">
+    <form  [formGroup]="employeeForm" method="POST" (ngSubmit)="ngSubmit()" enctype="multipart/form-data" class="form-horizontal">
+      <div class="d-flex flex-column">
+        <div class="col-12 mb-3 d-flex flex-column flex-md-row form-group">
+            <div class="col-12 col-md-3 col-lg-2">
+                <label for="username">Username <span class="text-danger">*</span></label>
+            </div>
+            <div class="col">
+                <input type="text" id="username" name="username" class="form-control" placeholder="username" formControlName="username">
+                <div *ngIf="employeeForm.get('username')?.invalid && employeeForm.get('username')?.touched" class="text-danger">
+                  <small *ngIf="employeeForm.get('username')?.errors?.['required']">username is required.</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mb-3 d-flex flex-column flex-md-row form-group">
+          <div class="col-12 col-md-3 col-lg-2">
+              <label for="firstName">FirstName <span class="text-danger">*</span></label>
+          </div>
+          <div class="col">
+              <input type="text" id="firstName" name="firstName" class="form-control" placeholder="firstname" formControlName="firstName">
+              <div *ngIf="employeeForm.get('firtsName')?.invalid && employeeForm.get('firtsName')?.touched" class="text-danger">
+                <small *ngIf="employeeForm.get('firtsName')?.errors?.['required']">firtsname is required.</small>
+              </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3 d-flex flex-column flex-md-row form-group">
+          <div class="col-12 col-md-3 col-lg-2">
+              <label for="lastName">LastName <span class="text-danger">*</span></label>
+          </div>
+          <div class="col">
+              <input type="text" id="lastName" name="lastName" class="form-control" placeholder="lastname" formControlName="lastName">
+              <div *ngIf="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched" class="text-danger">
+                <small *ngIf="employeeForm.get('lastName')?.errors?.['required']">lastname is required.</small>
+              </div>
+              
+          </div>
+        </div>
+
+        <div class="col-12 mb-3 d-flex flex-column flex-md-row form-group">
+          <div class="col-12 col-md-3 col-lg-2">
+              <label for="email">Email <span class="text-danger">*</span></label>
+          </div>
+          <div class="col">
+              <input type="text" id="email" name="email" class="form-control" placeholder="email" formControlName="email">
+              <div *ngIf="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched" class="text-danger">
+                <small *ngIf="employeeForm.get('email')?.errors?.['required']">Email is required.</small>
+                <small *ngIf="employeeForm.get('email')?.errors?.['email']">Please enter a valid email address.</small>
+              </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3 d-flex flex-column flex-md-row form-group">
+          <div class="col-12 col-md-3 col-lg-2">
+              <label for="birthDate">Birthdate <span class="text-danger">*</span></label>
+          </div>
+          <div class="col">
+            <input type="date"
+              class="form-control"
+              formControlName="birthDate"
+              [max]="today"
+            >
+            <div *ngIf="employeeForm.get('birthDate')?.invalid && employeeForm.get('birthDate')?.touched" class="text-danger">
+              <small *ngIf="employeeForm.get('birthDate')?.errors?.['required']">birthdate is required.</small>
+              <small *ngIf="employeeForm.get('birthDate')?.errors?.['max']">birthdate cannot be in the future.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3 d-flex flex-column flex-md-row form-group">
+          <div class="col-12 col-md-3 col-lg-2">
+              <label for="basicSalary">Salary <span class="text-danger">*</span></label>
+          </div>
+          <div class="col">
+              <input 
+                type="text" 
+                id="basicSalary" 
+                name="basicSalary" 
+                class="form-control" 
+                placeholder="Salary" 
+                formControlName="basicSalary"
+                [currencyMask]="customCurrencyMaskConfig"
+              >
+              <div *ngIf="employeeForm.get('basicSalary')?.invalid && employeeForm.get('basicSalary')?.touched" class="text-danger">
+                <small *ngIf="employeeForm.get('basicSalary')?.errors?.['required']">salary is required.</small>
+              </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3 d-flex flex-column flex-md-row form-group">
+          <div class="col-12 col-md-3 col-lg-2">
+              <label for="status">status <span class="text-danger">*</span></label>
+          </div>
+          <div class="col">
+            <ng-select
+              class="form-control"
+              [items]="filteredStatus"
+              bindLabel="name"
+              bindValue="name"
+              placeholder="Select or search status"
+              [searchable]="true"
+              formControlName="status"
+              [clearable]="true">
+            </ng-select>
+            <div *ngIf="employeeForm.get('status')?.invalid && employeeForm.get('status')?.touched" class="text-danger">
+              <small *ngIf="employeeForm.get('status')?.errors?.['required']">status is required.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3 d-flex flex-column flex-md-row form-group">
+          <div class="col-12 col-md-3 col-lg-2">
+              <label for="group">Group <span class="text-danger">*</span></label>
+          </div>
+          <div class="col">
+            <ng-select
+              class="form-control"
+              [items]="filteredGroups"
+              bindLabel="name"
+              bindValue="name"
+              placeholder="Select or search group"
+              [searchable]="true"
+              formControlName="group"
+              [clearable]="true">
+            </ng-select>
+            <div *ngIf="employeeForm.get('group')?.invalid && employeeForm.get('group')?.touched" class="text-danger">
+              <small *ngIf="employeeForm.get('group')?.errors?.['required']">group is required.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3 d-flex flex-column flex-md-row form-group">
+          <div class="col-12 col-md-3 col-lg-2">
+              <label for="description">Description <span class="text-danger">*</span></label>
+          </div>
+          <div class="col">
+              <textarea
+                class="form-control"
+                formControlName="description"
+                row="5"
+                placeholder="Fill description"
+              ></textarea>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3 d-flex flex-column flex-md-row justify-content-end">
+          <div class="col-12 col-md-3 col-lg-2 me-2 mb-2 mb-md-0">
+            <a class="btn-primary-outline ff-poppins" routerLink="/employees">
+              Cancel
+            </a>
+          </div>
+          <div class="col-12 col-md-3 col-lg-2">
+            <button type="submit" class="w-100 px-5 btn-primary ff-poppins">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

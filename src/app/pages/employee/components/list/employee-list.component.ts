@@ -1,17 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeDto } from '../../model/employee.model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Params, Router, ActivatedRoute } from '@angular/router';
+import { Params, Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { ErrorMessage, Paging } from '../../../../shared/dto/global-model.model';
 import { EmployeeService } from '../../service/employee.service';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { itemsRowPerPage, maxPages } from '../../../../shared/dto/types/constant';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-employee-list',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule, 
+    FormsModule, 
+    RouterModule,
+    NgSelectModule
+  ],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.scss'
 })
@@ -52,7 +59,7 @@ export class EmployeeListComponent implements OnInit {
       this.currentPage = page;
     }
     this.filterQueryParam();
-
+    this.resetAlert();
     this.employeeService.list(this.params).subscribe({
       next: ([employee, paging]) => {
         this.employees = employee;
@@ -83,8 +90,7 @@ export class EmployeeListComponent implements OnInit {
 
 
   // __________________________________________ onChange / onClick Function
-  onChangeRowsData(event: Event) {
-    const value = (event.target as HTMLSelectElement).value;
+  onChangeRowsData(value: number) {
     if (value) {
       this.params['rowsPerPage'] = value;
     } else {
@@ -123,14 +129,12 @@ export class EmployeeListComponent implements OnInit {
         message: error?.error?.status?.description || error?.error?.message,
       };
       
-      alert(`Request Failed, ${this.errorMessage.message}`);
     } else {
       this.errorMessage = {
         ...this.errorMessage,
         statusCode: error.status,
         message: error.statusText,
       };
-      alert(`Something Went Wrong, ${this.errorMessage.message}`);
     }
   }
 
@@ -180,6 +184,13 @@ export class EmployeeListComponent implements OnInit {
     if (endPage < totalPage) {
       this.pages.push(-1);
       this.pages.push(totalPage);
+    }
+  }
+
+  resetAlert() {
+    this.errorMessage = {
+      message: '',
+      statusCode: 0,
     }
   }
 }

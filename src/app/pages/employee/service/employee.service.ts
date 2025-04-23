@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
-import { map, Observable, retry } from 'rxjs';
+import { catchError, map, Observable, retry, throwError } from 'rxjs';
 import { EmployeeDto } from '../model/employee.model';
-import { Paging, ResponsePagination } from '../../../shared/dto/global-model.model';
+import { Paging, ResponsePagination, SingleResponse } from '../../../shared/dto/global-model.model';
 
 @Injectable({
   providedIn: 'root'
