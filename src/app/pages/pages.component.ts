@@ -14,12 +14,14 @@ export class PagesComponent {
     {
       label: 'User',
       path: 'users',
-      isActive: true
     },
     {
       label: 'Menu',
       path: 'menus',
-      isActive: false
+    },
+    {
+      label: 'Employee',
+      path: 'employees',
     },
   ];
 }
