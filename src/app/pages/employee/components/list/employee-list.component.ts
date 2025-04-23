@@ -35,11 +35,11 @@ export class EmployeeListComponent implements OnInit {
 
   // __________________________________________ onLoad Function
   ngOnInit(): void {
+    this.watchKeyword();
     this.activatedRoute.queryParams.subscribe({
       next: (params: Params) => {
         if (params['keyword']) this.keyword.patchValue(params['keyword']); 
         this.params = params;
-        this.watchKeyword();
         this.getListEmployee();
       }
     });
@@ -98,7 +98,7 @@ export class EmployeeListComponent implements OnInit {
 
   goToPage(page: number) {
     if (page >= 1 && page <= this.pagingData.totalPages) {
-      this.params = {...this.params, page: page};
+      this.params['page'] = page;
       this.navigate();
     }
   }
