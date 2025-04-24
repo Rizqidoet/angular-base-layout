@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit{
     const formValue = this.loginForm.value;
     console.log('formValue', formValue);
     this.resetAlert();
-    if (formValue.username === userName && formValue.password === password) this.router.navigate(['/employees']);
+    if (formValue.username === userName && formValue.password === password) this.router.navigate(['/pages/employees']);
     else this.handleError();
   }
 

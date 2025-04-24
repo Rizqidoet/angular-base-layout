@@ -95,7 +95,7 @@ export class EmployeeFormComponent implements OnInit {
 
   backToList() {
     bootstrap.Modal.getInstance(document.getElementById('confirmationModal')).hide();
-    this.router.navigate(['/employees']);
+    this.router.navigate(['/pages/employees']);
   }
 
 

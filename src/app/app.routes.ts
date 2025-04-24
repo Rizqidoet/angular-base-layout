@@ -10,6 +10,15 @@ import { LoginComponent } from './pages/auth/login/component/login.component';
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'pages',
     component: PagesComponent,
     children: [
       {
@@ -38,8 +47,5 @@ export const routes: Routes = [
       },
     ]
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-  }
+  
 ];

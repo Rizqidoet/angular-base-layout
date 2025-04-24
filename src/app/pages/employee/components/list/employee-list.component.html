@@ -59,9 +59,9 @@
             <td>{{ employee.group || '-' }}</td>
             <td>{{ employee.description || '-' }}</td>
             <td class="text-center d-inline-flex flex-row">
-              <button class="btn-primary me-1" routerLink="form/{{employee.username}}">edit</button>
+              <button class="btn btn-warning me-1" routerLink="form/{{employee.username}}">edit</button>
               <button class="btn-secondary me-1" routerLink="detail/{{employee.username}}" [queryParams]="params">detail</button>
-              <button class="btn-primary-outline" (click)="openDeleteModal(employee)">delete</button>
+              <button class="btn btn-danger" (click)="openDeleteModal(employee)">delete</button>
             </td>
           </tr>
         </tbody>

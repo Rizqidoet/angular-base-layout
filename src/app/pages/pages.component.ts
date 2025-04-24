@@ -13,15 +13,15 @@ export class PagesComponent {
   menus: Array<MainMenuDto> = [
     {
       label: 'User',
-      path: 'users',
+      path: '/pages/users',
     },
     {
       label: 'Menu',
-      path: 'menus',
+      path: '/pages/menus',
     },
     {
       label: 'Employee',
-      path: 'employees',
+      path: '/pages/employees',
     },
   ];
 }
