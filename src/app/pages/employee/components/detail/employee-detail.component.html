@@ -1,0 +1,87 @@
+<div class="d-flex flex-column mt-3 mt-md-5 mx-3 mx-lg-0 position-relative mb-5">
+  <div class="wrapper-avatar">
+    <img src="assets/images/user.png" alt="Avatar" class="avatar d-none d-lg-block" />
+    <!-- <div class="avatar"></div> -->
+  </div>
+  <div class="col-12 bg-color-quinary rounded-top p-3 text-end">
+    <span class="ff-poppins fw-600 fs-28 text-white">
+      Detail Employee
+    </span>
+  </div>
+  <div class="col-12 border border-start border-end py-3 px-3 d-flex flex-column">
+    <div class="d-flex flex-column flex-lg-row justify-content-end align-items-center">
+      <div class="col-12 col-lg-3 d-flex flex-column justify-content-center align-items-center flex-md-row mb-4 mb-lg-0 d-block d-lg-none">
+        <img src="assets/images/user.png" alt="Avatar" class="avatar" />
+      </div>
+      <div class="col-12 col-lg-9 d-flex flex-column flex-md-row">
+        <div class="col-12 col-md-4 col-lg-3 order-1 order-md-0 mb-2 mb-md-0 d-flex flex-column">
+          <span class="ff-poppins fw-400 fs-20 tc-primary me-auto">
+            {{ employee.username || '-' }}
+          </span>
+          <span class="ff-poppins fw-300 fs-12 text-muted me-auto">
+            {{ employee.group || '-' }}
+          </span>
+          <div class="d-inline-flex mt-3">
+            @if (employee.status === optionsStatus.ACTIVE) {
+              <span class="badge text-bg-primary px-4">
+                <i class="bi bi-person-check me-2"></i>{{ employee.status || '-' }}
+              </span>
+            } @else {
+              <span class="badge text-bg-danger px-4">
+                <i class="bi bi-person-x me-2"></i>{{ employee.status || '-' }}
+              </span>
+            }
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-7 order-2 order-md-1 border rounded-3 d-flex flex-row p-2 me-2">
+          <div class="col-6 d-flex flex-column">
+            <span class="ff-poppins fw-400 fs-18 tc-quinary">
+              Personal Info
+            </span>
+            <span class="ff-poppins fw-400 fs-12 text-muted">
+              Fullname
+            </span>
+            <span class="ff-poppins fw-400 fs-14 text-muted mb-2">
+              {{ employee.firstName || '-' }} {{ employee.lastName || '-' }} 
+            </span>
+            <span class="ff-poppins fw-400 fs-12 text-muted">
+              Birthdate
+            </span>
+            <span class="ff-poppins fw-400 fs-14 text-muted mb-2">
+              {{ employee.birthDate | date }} 
+            </span>
+          </div>
+          <div class="col-6 d-flex flex-column">
+            <span class="ff-poppins fw-400 fs-18 tc-quinary">
+              Employee Detail
+            </span>
+            <span class="ff-poppins fw-400 fs-12 text-muted">
+              Salary
+            </span>
+            <span class="ff-poppins fw-400 fs-14 text-muted mb-2">
+              {{ (employee.basicSalary.toString() | currency:'Rp. ':'symbol':'1.0-0') || '-' }}
+            </span>
+            <span class="ff-poppins fw-400 fs-12 text-muted">
+              Email
+            </span>
+            <span class="ff-poppins fw-400 fs-14 text-muted">
+              {{ employee.email || '-' }} 
+            </span>
+          </div>
+        </div>
+        <div class="col-12 col-md-2 order-0 order-md-2 mb-2 mb-md-0 d-flex flex-column">
+          <a routerLink="/employees/form/{{ employee.username }}" class="w-100 btn-primary ff-poppins">
+            <i class="bi bi-pencil-square me-1"></i> Edit
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 d-flex justify-content-end mt-3">
+    <div class="col-4 col-md-2">
+      <a routerLink="/employees" [queryParams]="backQueryParams" class="btn-primary-outline ff-poppins">
+        Ok
+      </a>
+    </div>
+  </div>
+</div>

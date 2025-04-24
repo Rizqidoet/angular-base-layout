@@ -40,14 +40,14 @@
             <th class="mw-20">Email</th>
             <th class="mw-10">Birthdate</th>
             <th class="mw-15">Salary</th>
-            <th class="mw-10">status</th>
+            <th class="mw-10">Status</th>
             <th class="mw-10">Group</th>
-            <th class="mw-20">Description</th>
+            <th class="mw-15">Description</th>
             <th class="text-center mw-15">Action</th>
           </tr>
         </thead>
-        <tbody *ngIf="employees && employees.employee && employees.employee.length > 0; else showListEmployee">
-          <tr *ngFor="let employee of employees.employee; let i = index">
+        <tbody *ngIf="paginatedEmployees && paginatedEmployees && paginatedEmployees.length > 0; else showListEmployee">
+          <tr *ngFor="let employee of paginatedEmployees; let i = index">
             <td>{{ i + startRow }}</td>
             <td>{{ employee.username || '-' }}</td>
             <td>{{ employee.firstName || '-' }}</td>
@@ -58,9 +58,10 @@
             <td>{{ employee.status || '-' }}</td>
             <td>{{ employee.group || '-' }}</td>
             <td>{{ employee.description || '-' }}</td>
-            <td class="text-center">
-              <button class="btn-primary me-1">edit</button>
-              <button class="btn-primary-outline">delete</button>
+            <td class="text-center d-inline-flex flex-row">
+              <button class="btn-primary me-1" routerLink="form/{{employee.username}}">edit</button>
+              <button class="btn-secondary me-1" routerLink="detail/{{employee.username}}" [queryParams]="params">detail</button>
+              <button class="btn-primary-outline" (click)="openDeleteModal(employee)">delete</button>
             </td>
           </tr>
         </tbody>
@@ -121,6 +122,31 @@
             </ul>
           </nav>
         }
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete <strong>{{ selectedEmployee?.username }}</strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary-outline" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onDeleteEmployee(selectedEmployee?.username!)">Delete</button>
       </div>
     </div>
   </div>

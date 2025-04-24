@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { customCurrencyMask, groupNames, statusNames } from '../../../../shared/dto/types/constant';
 import { NgxCurrencyDirective } from "ngx-currency";
 import { NgSelectModule } from '@ng-select/ng-select';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-employee-form',
@@ -32,6 +33,8 @@ export class EmployeeFormComponent implements OnInit {
   today: string = new Date().toISOString().split('T')[0];
   filteredGroups = groupNames;
   filteredStatus = statusNames;
+  isEdit: boolean = false;
+  selectedUsername!: string;
 
   constructor( 
     private readonly employeeService: EmployeeService,
@@ -42,6 +45,17 @@ export class EmployeeFormComponent implements OnInit {
   // __________________________________________ onLoad Function
   ngOnInit() {
     this.buildForm();
+    this.route.params.subscribe(params => {
+      const username = params['username'];
+      if (username) {
+        this.isEdit = true;
+        this.selectedUsername = username;
+        const employee = this.employeeService.getByUsername(username);
+        if (employee) {
+          this.employeeForm.patchValue(employee);
+        }
+      }
+    });
   }
 
   buildForm(): void {
@@ -68,6 +82,20 @@ export class EmployeeFormComponent implements OnInit {
 
     const formValue = this.employeeForm.value;
     console.log('formValue2', formValue);
+
+    if (this.isEdit) {
+      this.employeeService.update(this.selectedUsername, formValue);
+    } else {
+      this.employeeService.create(formValue);
+    }
+
+    const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+    modal.show();
+  }
+
+  backToList() {
+    bootstrap.Modal.getInstance(document.getElementById('confirmationModal')).hide();
+    this.router.navigate(['/employees']);
   }
 
 

@@ -4,6 +4,7 @@ import { MenusComponent } from './pages/menus/menus.component';
 import { PagesComponent } from './pages/pages.component';
 import { EmployeeListComponent } from './pages/employee/components/list/employee-list.component';
 import { EmployeeFormComponent } from './pages/employee/components/form/employee-form.component';
+import { EmployeeDetailComponent } from './pages/employee/components/detail/employee-detail.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,14 @@ export const routes: Routes = [
       {
         path: 'employees/form',
         component: EmployeeFormComponent
+      },
+      {
+        path: 'employees/form/:username',
+        component: EmployeeFormComponent
+      },
+      {
+        path: 'employees/detail/:username',
+        component: EmployeeDetailComponent
       },
     ]
   },
