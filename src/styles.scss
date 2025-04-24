@@ -5,6 +5,7 @@ $color-secondary: #A3D2CA;    // Mint green (netral, kalem)
 $color-secondary-hover: #8aaea8;    // Mint green hover (netral, kalem)
 $color-tertiary: #F7F7F7;     // Light grey/white (buat background adem)
 $color-quaternary: #056676;   // Deep sea blue (buat teks/aksen elegan)
+$color-quaternary-hover: #065966;   // Deep sea blue (buat teks/aksen elegan)
 $color-quinary: #3693d1;      // Cool steel blue (buat outline/shadow)
 
 ng-select.form-control {
@@ -282,6 +283,31 @@ ng-select.form-control {
   transition: all ease-in-out 0.2s;
 }
 .btn-secondary[disabled] {
+  cursor: not-allowed; 
+  opacity: 0.5; 
+}
+
+
+.btn-quaternary {
+  height: 35px;
+  background-color: $color-quaternary !important;
+  color: $color-tertiary !important;
+  padding-left: 25px;
+  padding-right: 25px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  transition: all ease-in-out 0.2s;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-quaternary:hover {
+  background-color: $color-quaternary-hover !important;
+  transition: all ease-in-out 0.2s;
+}
+.btn-quaternary[disabled] {
   cursor: not-allowed; 
   opacity: 0.5; 
 }

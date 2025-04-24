@@ -5,7 +5,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100">
         <li *ngFor="let menu of menus" class="nav-item">
           <a 
             class="nav-link cursor-pointer"
@@ -16,6 +16,17 @@
             [ngClass]="rla.isActive ? 'text-muted' : 'text-white'"
           >
             {{menu.label}}
+          </a>
+        </li>
+
+        <li class="nav-item ms-start ms-lg-auto pe-3">
+          <a 
+            class="nav-link cursor-pointer text-white"
+            aria-current="page"
+            routerLinkActive="active"
+            routerLink="/login"
+          >
+            Logout
           </a>
         </li>
       </ul>

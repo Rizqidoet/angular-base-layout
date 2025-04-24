@@ -39,13 +39,13 @@ export class EmployeeFormComponent implements OnInit {
   constructor( 
     private readonly employeeService: EmployeeService,
     private readonly router: Router,
-    private readonly route: ActivatedRoute,
+    private readonly ActivatedRoute: ActivatedRoute,
   ) { }
 
   // __________________________________________ onLoad Function
   ngOnInit() {
     this.buildForm();
-    this.route.params.subscribe(params => {
+    this.ActivatedRoute.params.subscribe(params => {
       const username = params['username'];
       if (username) {
         this.isEdit = true;
